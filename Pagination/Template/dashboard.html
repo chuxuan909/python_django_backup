@@ -1,0 +1,39 @@
+<table class="table table-hover">
+  <tr>
+      <th>ID</th>
+      <th>主机名</th>
+      <th>主机IP</th>
+      <th>主机状态</th>
+  </tr>
+  {% for i in host_list %}
+   <tr>
+       <td class="active">{{ i.id }}</td>
+       <td class="success">{{ i.host_name }}</td>
+       <td class="success">{{ i.host_ip  }}</td>
+       <td class="{{ i.host_status }}">{{ i.get_host_status_display }}</td> {# 利用CSS根据数据库字段不同的值显示不同的字段 #}
+   </tr>
+  {% endfor %}
+  </table>
+
+{# 生成页码数检索 #}
+  <nav aria-label="...">
+<ul class="pagination" >
+  {% if host_list.has_previous %}  {# 判断是否有前一页 #}
+  <li class="active"><a href="?page={{ host_list.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+  {% else %}
+  <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+  {% endif %}
+  {% for i in host_list.paginator.page_range  %}  {# host_list.paginator.page_range表示生成一个迭代器 #}
+      {% if  i == host_list.number %}
+      <li class="active" ><a href="?page={{ i }}">{{ i }}<span class="sr-only">(current)</span></a></li>
+      {% else %}
+      <li class="" ><a href="?page={{ i }}">{{ i }}<span class="sr-only">(current)</span></a></li>
+      {% endif %}
+  {% endfor %}
+  {% if host_list.has_next %}  {# 判断是否有后一页 #}
+      <li class="active"><a href="?page={{ host_list.next_page_number }}" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
+  {% else %}
+      <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
+  {% endif %}
+</ul>
+  </nav>
