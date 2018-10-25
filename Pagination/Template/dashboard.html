@@ -1,3 +1,4 @@
+{% load my_tags%}
 <table class="table table-hover">
   <tr>
       <th>ID</th>
@@ -24,11 +25,7 @@
   <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
   {% endif %}
   {% for i in host_list.paginator.page_range  %}  {# host_list.paginator.page_range表示生成一个迭代器 #}
-      {% if  i == host_list.number %}
-      <li class="active" ><a href="?page={{ i }}">{{ i }}<span class="sr-only">(current)</span></a></li>
-      {% else %}
-      <li class="" ><a href="?page={{ i }}">{{ i }}<span class="sr-only">(current)</span></a></li>
-      {% endif %}
+      {% display_page host_list.number i %}
   {% endfor %}
   {% if host_list.has_next %}  {# 判断是否有后一页 #}
       <li class="active"><a href="?page={{ host_list.next_page_number }}" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a></li>
