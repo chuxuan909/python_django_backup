@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from test_01 import models
+from pro import models
 # Create your views here.
 
 def bashborad(request):
     host_li=models.host.objects.all()
 
-    #¿ªÊ¼·ÖÒ³10¸ömodels²éÑ¯ÊµÀıÎªÒ»Ò³
+    #å¼€å§‹åˆ†é¡µ10ä¸ªmodelsæŸ¥è¯¢å®ä¾‹ä¸ºä¸€é¡µ
     host_li_groups=Paginator(host_li,10)
-    page_num=request.GET.get('page')     #»ñÈ¡ÓÃ»§ÏëÒªµÄµÚpage_numĞ¡×é
+    page_num=request.GET.get('page')     #è·å–ç”¨æˆ·æƒ³è¦çš„ç¬¬page_numå°ç»„
 
-    host_li_group=host_li_groups.get_page(page_num)  #ÄÃµ½ÓÃ»§ÏëÒªµÄµÚpage_numĞ¡×é,2.0Ê¹ÓÃget_page·½·¨²»ÔÚ²¶»ñÒì³£
-    return  render(request,'pro/dashboard.html',{'host_list':host_li_group,})  #proÎªÏîÄ¿Ãû
+    host_li_group=host_li_groups.get_page(page_num)  #æ‹¿åˆ°ç”¨æˆ·æƒ³è¦çš„ç¬¬page_numå°ç»„,2.0ä½¿ç”¨get_pageæ–¹æ³•ä¸åœ¨æ•è·å¼‚å¸¸
+    return  render(request,'pro/dashboard.html',{'host_list':host_li_group,})  #proä¸ºé¡¹ç›®å
