@@ -9,3 +9,7 @@
 ## 分页功能
 
 - Pagination目录
+
+## 用于设置django用户权限的装饰器
+
+- Decorator_for_DjangoPermisson目录
